@@ -20,3 +20,8 @@ test('test1', () => {
   const expected = readFile('result-json.txt').trim();
   expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toBe(expected);
 });
+
+test('test2', () => {
+  const expected = readFile('result-yml.txt').trim();
+  expect(genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'))).toBe(expected);
+});
