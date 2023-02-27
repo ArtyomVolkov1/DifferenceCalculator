@@ -4,6 +4,8 @@ import path from 'path';
 
 import fs from 'fs';
 
+import parse from './parsers.js';
+
 const sortByKeys = (obj1, obj2) => {
   const key1 = Object.keys(obj1);
   const key2 = Object.keys(obj2);
@@ -30,9 +32,15 @@ const getDiff = (obj1, obj2) => {
   return out;
 };
 
+const buildPath = (filepath) => path.resolve(filepath);
+
+const getFormatFile = (filepath) => path.extname(filepath).replace('.', '');
+
+const getData = (filepath) => parse(fs.readFileSync(filepath, 'utf8'), getFormatFile(filepath));
+
 const genDiff = (filepath1, filepath2) => {
-  const data1 = JSON.parse(fs.readFileSync(path.resolve(filepath1)));
-  const data2 = JSON.parse(fs.readFileSync(path.resolve(filepath2)));
+  const data1 = getData(buildPath(filepath1));
+  const data2 = getData(buildPath(filepath2));
   return getDiff(data1, data2);
 };
 
