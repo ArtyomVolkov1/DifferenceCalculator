@@ -12,7 +12,7 @@ program
   .argument('<filepath2>', 'parth to file2')
   .option('-f, --format <type>', 'output format')
   .action((filepath1, filepath2) => {
-    console.log(genDiff(filepath1, filepath2));
+    console.log(genDiff(filepath1, filepath2, program.opts().format));
   });
 
-program.parse(process.argv);
+program.parse();
