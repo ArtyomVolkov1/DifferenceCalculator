@@ -14,19 +14,25 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf8');
 
-test('test1', () => {
-  const expected = readFile('result-json.txt').trim();
-  expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toBe(expected);
-});
+const resultStylish = readFile('result-stylish.txt').trim();
 
-test('test2', () => {
-  const expected = readFile('result-yml.txt').trim();
-  expect(genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'))).toBe(expected);
-});
+const resultPlain = readFile('result-plain.txt').trim();
 
-test('test3', () => {
-  const file1 = getFixturePath('file1.yml');
-  const file2 = getFixturePath('file2.yml');
-  const expected = readFile('result-plain.txt').trim();
-  expect(genDiff(file1, file2, 'plain')).toBe(expected);
+const resultJsonStringify = readFile('result-json-stringify.txt').trim();
+
+describe('difference calculator for diffirent format', () => {
+  test('json format', () => {
+    const file1 = getFixturePath('file1.json');
+    const file2 = getFixturePath('file2.json');
+    expect(genDiff(file1, file2, 'stylish')).toBe(resultStylish);
+    expect(genDiff(file1, file2, 'plain')).toBe(resultPlain);
+    expect(genDiff(file1, file2, 'json')).toBe(resultJsonStringify);
+  });
+  test('yml format', () => {
+    const file1 = getFixturePath('file1.yml');
+    const file2 = getFixturePath('file2.yml');
+    expect(genDiff(file1, file2, 'stylish')).toBe(resultStylish);
+    expect(genDiff(file1, file2, 'plain')).toBe(resultPlain);
+    expect(genDiff(file1, file2, 'json')).toBe(resultJsonStringify);
+  });
 });
