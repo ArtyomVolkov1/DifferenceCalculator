@@ -4,8 +4,6 @@ import fs from 'fs';
 
 import { fileURLToPath } from 'url';
 
-// import { dirname } from 'path';
-
 import genDiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,4 +22,11 @@ test('test1', () => {
 test('test2', () => {
   const expected = readFile('result-yml.txt').trim();
   expect(genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'))).toBe(expected);
+});
+
+test('test3', () => {
+  const file1 = getFixturePath('file1.yml');
+  const file2 = getFixturePath('file2.yml');
+  const expected = readFile('result-plain.txt').trim();
+  expect(genDiff(file1, file2, 'plain')).toBe(expected);
 });
