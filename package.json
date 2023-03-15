@@ -2,11 +2,11 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "[![Actions Status](https://github.com/ArtyomVolkov1/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/ArtyomVolkov1/frontend-project-46/actions)",
+  "description": "CLI utility to find the difference between two config files.",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "npx jest"
   },
