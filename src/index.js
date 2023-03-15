@@ -1,18 +1,14 @@
 import path from 'path';
-
 import fs from 'fs';
-
 import parse from './parsers.js';
-
 import buildTree from './buildTree.js';
-
-import getFormat from '../formatters/index.js';
+import getFormat from './formatters/index.js';
 
 const buildPath = (filepath) => path.resolve(process.cwd(), filepath);
 
-const getFormatFile = (filepath) => path.extname(filepath).replace('.', '');
+const getFileFormat = (filepath) => path.extname(filepath).replace('.', '');
 
-const getData = (filepath) => parse(fs.readFileSync(filepath, 'utf8'), getFormatFile(filepath));
+const getData = (filepath) => parse(fs.readFileSync(filepath, 'utf8'), getFileFormat(filepath));
 
 const genDiff = (filepath1, filepath2, output) => {
   const data1 = getData(buildPath(filepath1));
