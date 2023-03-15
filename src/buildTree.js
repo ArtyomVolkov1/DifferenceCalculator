@@ -1,16 +1,9 @@
 import _ from 'lodash';
 
-const sortByKeys = (obj1, obj2) => {
-  const key1 = Object.keys(obj1);
-  const key2 = Object.keys(obj2);
-  const keys = _.union(key1, key2);
-  const sortKeys = _.sortBy(keys);
-  return sortKeys;
-};
-
 const buildTree = (obj1, obj2) => {
-  const keys = sortByKeys(obj1, obj2);
-  const result = keys.map((key) => {
+  const keys = _.union(_.keys(obj1), _.keys(obj2));
+  const sortedKeys = _.sortBy(keys);
+  const result = sortedKeys.map((key) => {
     if (!_.has(obj1, key)) {
       return { key, value: obj2[key], type: 'added' };
     }
@@ -26,8 +19,8 @@ const buildTree = (obj1, obj2) => {
     }
     return {
       key,
-      value1: obj1[key],
-      value2: obj2[key],
+      oldValue: obj1[key],
+      newValue: obj2[key],
       type: 'changed',
     };
   });
